@@ -1,0 +1,95 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class student
+{
+    string name;
+    int rollno;
+    static char div;
+
+public:
+    student()
+    {
+        this->name = " ";
+        this->rollno = 0;
+    }
+    student(student &t)
+    {
+        cout << "Enetr new details" << endl;
+        cin >> name >> rollno >> div;
+        t.name = name;
+        t.rollno = rollno;
+        t.div = div;
+    }
+    inline void getdata()
+    {
+        cout << "Enter students details name,rollno & div" << endl;
+        cin >> name >> rollno >> div;
+    }
+    static void show(int x)
+    {
+        cout << div;
+    }
+    ~student()
+    {
+        cout << "Destructor is called";
+    }
+
+    friend class display;
+};
+
+class display
+{
+public:
+    void Display_data(student &s)
+    {
+        cout << "\n-------------------------\n";
+        cout << s.name << "\n"
+             << s.rollno << "\n";
+        student::show(s.div);
+    }
+};
+char student::div = 'C';
+
+int main()
+{
+    student *s = new student[5];
+    display u;
+    int ch;
+    int ustd;
+    char n;
+    do
+    {
+        cout << "\n 1: Getdata";
+        cout << "\n 2: Display data";
+        cout << "\n 3: Update";
+        cout << "\n Enter your choise : ";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            for (int i = 0; i < 3; i++)
+            {
+                s[i].getdata();
+            }
+            break;
+        case 2:
+            cout << "students Details are" << endl;
+            for (int i = 0; i < 3; i++)
+            {
+                u.Display_data(s[i]);
+            }
+            break;
+        case 3:
+            cout << "Enter the rollno to update student details : ";
+            cin >> ustd;
+            ustd = ustd - 1;
+            student temp(s[ustd]);
+            break;
+        }
+
+    } while (ch != 3);
+    delete s;
+    return 0;
+}

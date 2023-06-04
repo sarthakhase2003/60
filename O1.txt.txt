@@ -1,0 +1,131 @@
+#include <iostream>
+using namespace std;
+
+class complex
+{
+private:
+    float real, img;
+
+public:
+    complex()
+    {
+    }
+    void getdata()
+    {
+        cout << "enter real part :";
+        cin >> real;
+        cout << "enter img part :";
+        cin >> img;
+    }
+    void display()
+    {
+        cout << real << "+" << img << "i" << endl;
+    }
+    friend complex operator+(complex x, complex y);
+    friend complex operator-(complex x, complex y);
+    friend complex operator*(complex x, complex y);
+    friend complex operator/(complex x, complex y);
+};
+complex operator+(complex x, complex y)
+{
+    complex temp;
+    temp.real = x.real + y.real;
+    temp.img = x.img + y.img;
+    return (temp);
+}
+complex operator-(complex x, complex y)
+{
+    complex temp;
+    temp.real = x.real - y.real;
+    temp.img = x.img - y.img;
+    return (temp);
+}
+complex operator*(complex x, complex y)
+{
+    complex temp;
+    temp.real = x.real * y.real - (x.img * y.img);
+    temp.img = x.real * y.img + (x.img * y.real);
+    return (temp);
+}
+complex operator/(complex x, complex y)
+{
+    complex temp;
+    temp.real = ((x.real * y.real) + (x.img * y.img)) / ((x.real * x.real) + (x.img * x.img));
+    temp.img = ((x.img * y.real) - (x.real * y.img)) / ((x.real * x.real) + (x.img * x.img));
+    return (temp);
+}
+
+int main()
+{
+    int ch;
+    complex c1, c2, c3, c4, c5, c6;
+    do
+    {
+        cout << "!!!MENU!!!" << endl;
+        cout << "1 Addition " << endl;
+        cout << "2 Subtraction " << endl;
+        cout << "3 Multiplication " << endl;
+        cout << "4 Division " << endl;
+        cout << "5 Exit " << endl;
+        cout << "Enter your choice : ";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            cout << "Enter the First complex number :" << endl;
+            c1.getdata();
+            cout << "Your first complex number : ";
+            c1.display();
+            cout << "Enter the second complex number :" << endl;
+            c2.getdata();
+            cout << "Your Second complex number : ";
+            c2.display();
+            c3 = c1 + c2;
+            cout << "Addition is : ";
+            c3.display();
+            break;
+        case 2:
+            cout << "Enter the First complex number :" << endl;
+            c1.getdata();
+            cout << "Your first complex number : ";
+            c1.display();
+            cout << "Enter the second complex number :" << endl;
+            c2.getdata();
+            cout << "Your Second complex number : ";
+            c2.display();
+            c4 = c1 - c2;
+            cout << "Subtraction is : ";
+            c4.display();
+            break;
+        case 3:
+            cout << "Enter the First complex number :" << endl;
+            c1.getdata();
+            cout << "Your first complex number : ";
+            c1.display();
+            cout << "Enter the second complex number :" << endl;
+            c2.getdata();
+            cout << "Your Second complex number : ";
+            c2.display();
+            c5 = c1 * c2;
+            cout << "Multiplication is : ";
+            c5.display();
+            break;
+        case 4:
+            cout << "Enter the First complex number :" << endl;
+            c1.getdata();
+            cout << "Your first complex number : ";
+            c1.display();
+            cout << "Enter the second complex number :" << endl;
+            c2.getdata();
+            cout << "Your Second complex number : ";
+            c2.display();
+            c6 = c1 / c2;
+            cout << "Division is : ";
+            c6.display();
+            break;
+        case 5:
+            return 0;
+            break;
+        }
+    } while (ch != 5);
+}
